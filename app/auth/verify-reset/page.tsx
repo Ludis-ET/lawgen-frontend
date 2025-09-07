@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MotionWrapper } from "@/components/ui/motion-wrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,8 +13,9 @@ import { api } from "@/src/lib/api";
 
 export default function VerifyResetOTPPage() {
   const router = useRouter();
-  const sp = useParams();
-  const email = sp.email || "";
+  const sp = useSearchParams();
+  const emailParam = sp.get("email") || "";
+  const email = emailParam;
   const [otp, setOtp] = useState("");
   const [status, setStatus] = useState<null | {
     type: "success" | "error";

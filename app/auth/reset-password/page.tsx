@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MotionWrapper } from "@/components/ui/motion-wrapper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,12 +10,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { api } from "@/src/lib/api";
 
-export const dynamic = 'force-dynamic';
-
 export default function ResetPasswordPage() {
   const router = useRouter();
-  const sp = useParams();
-  const token = sp.token || "";
+  const sp = useSearchParams();
+  const token = sp.get("token") || "";
   // Optionally get access token from localStorage for Bearer auth
   const accessToken =
     typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
@@ -65,8 +63,14 @@ export default function ResetPasswordPage() {
           <CardHeader className="text-center">
             <MotionWrapper animation="fadeInUp">
               <Link href="/" className="inline-block">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-105 transition-transform">
-                  <span className="text-2xl text-primary-foreground">⚖️</span>
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-105 transition-transform overflow-hidden border border-muted shadow bg-background">
+                  <img
+                    src="/logo (1).svg"
+                    alt="LawGen Logo"
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 object-cover rounded-full"
+                  />
                 </div>
               </Link>
             </MotionWrapper>
